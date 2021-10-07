@@ -70,15 +70,15 @@ class TradeClient(object):
         check_should_not_none(callback, "callback")
 
         params = {
-            "symbol_list" : symbol_list,
+            "symbol_list": symbol_list,
         }
 
         from huobi.service.trade.sub_order_update_v2 import SubOrderUpdateV2Service
         SubOrderUpdateV2Service(params).subscribe(callback, error_handler, **self.__kwargs)
 
-    def req_order_list(self, symbol: 'str', account_id: int, callback, order_states:'str',
-                       order_types:'str'=None, start_date:'str'=None, end_date:'str'=None, from_id=None,
-                       direct=None, size=None, client_req_id:'str'=None, error_handler=None):
+    def req_order_list(self, symbol: 'str', account_id: int, callback, order_states: 'str',
+                       order_types: 'str' = None, start_date: 'str' = None, end_date: 'str' = None, from_id=None,
+                       direct=None, size=None, client_req_id: 'str' = None, error_handler=None):
         """
         request order list.
 
@@ -98,22 +98,22 @@ class TradeClient(object):
         check_should_not_none(callback, "callback")
         params = {
             "symbol": symbol,
-            "account-id" : account_id,
-            "states" : order_states,
-            "types" : order_types,
-            "start-date" : start_date,
-            "end-date" : end_date,
+            "account-id": account_id,
+            "states": order_states,
+            "types": order_types,
+            "start-date": start_date,
+            "end-date": end_date,
             "from": from_id,
-            "direct" : direct,
-            "size" : size,
-            "client-req-id" : client_req_id
+            "direct": direct,
+            "size": size,
+            "client-req-id": client_req_id
         }
 
         from huobi.service.trade.req_order_list import ReqOrderListService
         ReqOrderListService(params).subscribe(callback, error_handler, **self.__kwargs)
 
     def req_order_detail(self, order_id: 'str', callback,
-                                client_req_id:'str'=None, error_handler=None):
+                         client_req_id: 'str' = None, error_handler=None):
         """
         Subscribe candlestick/kline event. If the candlestick/kline is updated, server will send the data to client and onReceive in callback will be called.
 
@@ -165,22 +165,22 @@ class TradeClient(object):
         return GetOrderByClientOrderIdService(params).request(**self.__kwargs)
 
     def get_orders(self, symbol: 'str', order_state: 'OrderState', order_type: 'OrderType' = None,
-                              start_date: 'str' = None, end_date: 'str' = None, start_id: 'int' = None,
-                              size: 'int' = None, direct=None) -> list:
+                   start_date: 'str' = None, end_date: 'str' = None, start_id: 'int' = None,
+                   size: 'int' = None, direct=None) -> list:
         check_symbol(symbol)
         check_should_not_none(order_state, "order_state")
         start_date = format_date(start_date, "start_date")
         end_date = format_date(end_date, "end_date")
 
         params = {
-            "symbol" : symbol,
-            "types" : order_type,
-            "start-date" : start_date,
-            "end-date" : end_date,
-            "from" : start_id,
-            "states" : order_state,
-            "size" :  size,
-            "direct" : direct
+            "symbol": symbol,
+            "types": order_type,
+            "start-date": start_date,
+            "end-date": end_date,
+            "from": start_id,
+            "states": order_state,
+            "size": size,
+            "direct": direct
         }
 
         from huobi.service.trade.get_orders import GetOrdersService
@@ -203,18 +203,18 @@ class TradeClient(object):
         check_range(size, 1, 500, "size")
         check_should_not_none(account_id, "account_id")
         params = {
-            "symbol" : symbol,
-            "account-id" : account_id,
-            "side" : side,
-            "size" : size,
-            "from" : from_id,
-            "direct" : direct
+            "symbol": symbol,
+            "account-id": account_id,
+            "side": side,
+            "size": size,
+            "from": from_id,
+            "direct": direct
         }
 
         from huobi.service.trade.get_open_orders import GetOpenOrdersService
         return GetOpenOrdersService(params).request(**self.__kwargs)
 
-    def get_history_orders(self, symbol=None, start_time=None, end_time=None, size=None, direct=None)-> list:
+    def get_history_orders(self, symbol=None, start_time=None, end_time=None, size=None, direct=None) -> list:
         """
         Transfer Asset between Futures and Contract.
 
@@ -226,11 +226,11 @@ class TradeClient(object):
         :return: The Order list.
         """
         params = {
-            "symbol" :symbol,
-            "start-time" : start_time,
-            "end-time" : end_time,
-            "size" : size,
-            "direct" : direct
+            "symbol": symbol,
+            "start-time": start_time,
+            "end-time": end_time,
+            "size": size,
+            "direct": direct
         }
 
         from huobi.service.trade.get_history_orders import GetHistoryOrdersService
@@ -240,7 +240,7 @@ class TradeClient(object):
                          end_date: 'str' = None,
                          size: 'int' = None,
                          from_id: 'int' = None,
-                         direct:'str'=None):
+                         direct: 'str' = None):
         """
         Search for the trade records of an account.
 
@@ -259,13 +259,13 @@ class TradeClient(object):
         check_range(size, 1, 100, "size")
 
         params = {
-            "symbol" : symbol,
-            "start-date" : start_date,
-            "end-date" : end_date,
-            "types" : order_type,
-            "size" : size,
-            "from" : from_id,
-            "direct" : direct
+            "symbol": symbol,
+            "start-date": start_date,
+            "end-date": end_date,
+            "types": order_type,
+            "size": size,
+            "from": from_id,
+            "direct": direct
         }
 
         from huobi.service.trade.get_match_results import GetMatchResultsService
@@ -295,7 +295,7 @@ class TradeClient(object):
         return default_source
 
     def create_order_param_check(self, symbol: 'str', account_id: 'int', order_type: 'OrderType', amount: 'float',
-                     price: 'float', source:'str', client_order_id=None, stop_price=None, operator=None):
+                                 price: 'float', source: 'str', client_order_id=None, stop_price=None, operator=None):
         check_symbol(symbol)
         check_should_not_none(account_id, "account_id")
         check_should_not_none(order_type, "order_type")
@@ -311,8 +311,8 @@ class TradeClient(object):
             price = None
 
         params = {
-            "account-id" : account_id,
-            "amount" : amount,
+            "account-id": account_id,
+            "amount": amount,
             "price": price,
             "symbol": symbol,
             "type": order_type,
@@ -325,7 +325,7 @@ class TradeClient(object):
         return params
 
     def create_order(self, symbol: 'str', account_id: 'int', order_type: 'OrderType', amount: 'float',
-                     price: 'float', source:'str', client_order_id=None, stop_price=None, operator=None) -> int:
+                     price: 'float', source: 'str', client_order_id=None, stop_price=None, operator=None) -> int:
         """
         Make an order in huobi.
 
@@ -345,21 +345,22 @@ class TradeClient(object):
         """
 
         params = self.create_order_param_check(symbol, account_id, order_type, amount,
-                     price, source, client_order_id, stop_price, operator)
+                                               price, source, client_order_id, stop_price, operator)
         from huobi.service.trade.post_create_order import PostCreateOrderService
         return PostCreateOrderService(params).request(**self.__kwargs)
 
     def create_spot_order(self, symbol: 'str', account_id: 'int', order_type: 'OrderType', amount: 'float',
-                       price: 'float', client_order_id=None, stop_price=None,
-                       operator=None) -> int:
+                          price: 'float', client_order_id=None, stop_price=None,
+                          operator=None) -> int:
         order_source = OrderSource.API
         return self.create_order(symbol=symbol, account_id=account_id, order_type=order_type, amount=amount,
-                       price=price, source=order_source, client_order_id=client_order_id, stop_price=stop_price,
-                       operator=operator)
+                                 price=price, source=order_source, client_order_id=client_order_id,
+                                 stop_price=stop_price,
+                                 operator=operator)
 
     def create_margin_order(self, symbol: 'str', account_id: 'int', order_type: 'OrderType', amount: 'float',
-                       price: 'float', client_order_id=None, stop_price=None,
-                       operator=None) -> int:
+                            price: 'float', client_order_id=None, stop_price=None,
+                            operator=None) -> int:
         order_source = OrderSource.MARGIN_API
         return self.create_order(symbol=symbol, account_id=account_id, order_type=order_type, amount=amount,
                                  price=price, source=order_source, client_order_id=client_order_id,
@@ -367,8 +368,8 @@ class TradeClient(object):
                                  operator=operator)
 
     def create_super_margin_order(self, symbol: 'str', account_id: 'int', order_type: 'OrderType', amount: 'float',
-                            price: 'float', client_order_id=None, stop_price=None,
-                            operator=None) -> int:
+                                  price: 'float', client_order_id=None, stop_price=None,
+                                  operator=None) -> int:
         order_source = OrderSource.SUPER_MARGIN_API
         return self.create_order(symbol=symbol, account_id=account_id, order_type=order_type, amount=amount,
                                  price=price, source=order_source, client_order_id=client_order_id,
@@ -380,13 +381,13 @@ class TradeClient(object):
         check_should_not_none(order_id, "order_id")
 
         params = {
-            "order_id" : order_id
+            "order_id": order_id
         }
 
         from huobi.service.trade.post_cancel_order import PostCancelOrderService
         return PostCancelOrderService(params).request(**self.__kwargs)
 
-    def cancel_orders(self, symbol, order_id_list)->BatchCancelResult:
+    def cancel_orders(self, symbol, order_id_list) -> BatchCancelResult:
         """
         Submit cancel request for cancelling multiple orders.
 
@@ -403,13 +404,13 @@ class TradeClient(object):
             string_list.append(str(order_id))
 
         params = {
-            "order-ids" : string_list
+            "order-ids": string_list
         }
 
         from huobi.service.trade.post_batch_cancel_order import PostBatchCancelOrderService
         return PostBatchCancelOrderService(params).request(**self.__kwargs)
 
-    def cancel_open_orders(self, account_id, symbols: 'str'=None , side=None, size=None)->BatchCancelCount:
+    def cancel_open_orders(self, account_id, symbols: 'str' = None, side=None, size=None) -> BatchCancelCount:
         """
         Request to cancel open orders.
 
@@ -423,15 +424,15 @@ class TradeClient(object):
 
         params = {
             "account-id": account_id,
-            "symbol" : symbols,
-            "side" : side,
-            "size" : size
+            "symbol": symbols,
+            "side": side,
+            "size": size
         }
 
         from huobi.service.trade.post_batch_cancel_open_order import PostBatchCancelOpenOrderService
         return PostBatchCancelOpenOrderService(params).request(**self.__kwargs)
 
-    def cancel_client_order(self, client_order_id)->int:
+    def cancel_client_order(self, client_order_id) -> int:
         """
         Request to cancel open orders.
 
@@ -440,14 +441,14 @@ class TradeClient(object):
         check_should_not_none(client_order_id, "client-order-id")
 
         params = {
-            "client-order-id" : client_order_id
+            "client-order-id": client_order_id
         }
 
         from huobi.service.trade.post_cancel_client_order import PostCancelClientOrderService
         return PostCancelClientOrderService(params).request(**self.__kwargs)
 
     def transfer_between_futures_and_pro(self, currency: 'str', amount: 'float',
-                                        transfer_type: 'TransferFuturesPro')-> int:
+                                         transfer_type: 'TransferFuturesPro') -> int:
         """
         Transfer Asset between Futures and Contract.
 
@@ -462,9 +463,9 @@ class TradeClient(object):
         check_should_not_none(amount, "amount")
         check_should_not_none(transfer_type, "transfer_type")
         params = {
-            "currency" : currency,
-            "amount" : amount,
-            "type" : transfer_type
+            "currency": currency,
+            "amount": amount,
+            "type": transfer_type
 
         }
 

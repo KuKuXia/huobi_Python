@@ -35,7 +35,6 @@ class OrderUpdate:
         self.type = OrderType.INVALID
         self.accountId = 0
 
-
     def print_object(self, format_data=""):
         from huobi.utils.print_mix_object import PrintBasic
         PrintBasic.print_basic(self.orderId, format_data + "Order Id")
@@ -50,7 +49,3 @@ class OrderUpdate:
         PrintBasic.print_basic(self.symbol, format_data + "Symbol")
         PrintBasic.print_basic(self.type, format_data + "Order Type")
         PrintBasic.print_basic(self.accountId, format_data + "Account Id")
-
-
-
-

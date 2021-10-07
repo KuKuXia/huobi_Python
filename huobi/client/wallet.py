@@ -164,7 +164,7 @@ class WalletClient(object):
         from huobi.service.wallet.get_sub_user_deposit_address import GetSubUserDepositAddressService
         return GetSubUserDepositAddressService(params).request(**self.__kwargs)
 
-    def get_account_withdraw_address(self, currency: 'str', chain: 'str'=None, note: 'str'=None, limit: 'int' = 100,
+    def get_account_withdraw_address(self, currency: 'str', chain: 'str' = None, note: 'str' = None, limit: 'int' = 100,
                                      fromid: 'int' = None):
         check_should_not_none(currency, "currency")
         params = {
@@ -176,4 +176,3 @@ class WalletClient(object):
         }
         from huobi.service.wallet.get_account_withdraw_address import GetAccountWithdrawAddressService
         return GetAccountWithdrawAddressService(params).request(**self.__kwargs)
-

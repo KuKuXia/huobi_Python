@@ -9,7 +9,7 @@ from huobi.exception.huobi_api_exception import HuobiApiException
 
 def create_signature(api_key, secret_key, method, url, builder):
     if api_key is None or secret_key is None or api_key == "" or secret_key == "":
-        raise HuobiApiException(HuobiApiException.KEY_MISSING,  "API key and secret key are required")
+        raise HuobiApiException(HuobiApiException.KEY_MISSING, "API key and secret key are required")
 
     timestamp = utc_now()
     builder.put_url("AccessKeyId", api_key)

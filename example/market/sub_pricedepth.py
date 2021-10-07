@@ -1,7 +1,5 @@
-
 from huobi.client.market import MarketClient
 from huobi.constant import *
-
 
 
 def callback(price_depth_event: 'PriceDepthEvent'):

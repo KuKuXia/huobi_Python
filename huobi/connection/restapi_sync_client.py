@@ -8,7 +8,6 @@ from huobi.utils import *
 from huobi.exception.huobi_api_exception import HuobiApiException
 
 
-
 class RestApiSyncClient(object):
 
     def __init__(self, **kwargs):
@@ -94,6 +93,7 @@ class RestApiSyncClient(object):
     """
     for post batch operation, such as batch create orders[ /v1/order/batch-orders ]
     """
+
     def create_request_post_batch(self, method, url, params, parse):
         builder = UrlParamsBuilder()
         if params and len(params):
@@ -132,6 +132,7 @@ class RestApiSyncClient(object):
     """
     for post batch operation, such as batch create orders[ /v1/order/batch-orders ]
     """
+
     def request_process_post_batch(self, method, url, params, parse):
         if self.__performance_test is not None and self.__performance_test is True:
             return self.request_process_post_batch_performance(method, url, params, parse)
@@ -151,4 +152,3 @@ class RestApiSyncClient(object):
             return call_sync_perforence_test(request)
 
         return None, 0, 0
-

@@ -1,4 +1,3 @@
-
 from huobi.client.trade import TradeClient
 from huobi.constant import *
 
